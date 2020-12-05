@@ -6,6 +6,14 @@ public class Device extends Thread {
     private String Type;
     private int connect_port;
 
+    Device (String Str , Router SR)
+    {
+        super (Str.substring(0,Str.indexOf(" ")));
+        Type = Str.substring(Str.indexOf(" ")+1);
+        CommonRouter = SR;
+
+    }
+
 
     public void setType(String dtype) {
         Type=dtype;
