@@ -29,4 +29,8 @@ public class Device extends Thread {
     public void setConnect_port(int connect_port) {
         this.connect_port = connect_port;
     }
+    public void run()
+    {
+
+    }
 }
