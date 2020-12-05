@@ -7,23 +7,23 @@ public class Semaphore {
         Requests=num;
     }
 
-    public synchronized void P(Device Device){
+    public synchronized void P(Device device){
         Requests--;
         if(Requests<0) {
             try {
-                System.out.println(Device.getName() + " arrived and waiting");
+                System.out.println(device.getName() +device.getType() + " arrived and waiting");
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         else {
-            System.out.println(Device.getName() + " arrived");
+            System.out.println(device.getName() + device.getType()+ " arrived");
         }
     }
-    public synchronized void V() {
+    public synchronized void end() {
         Requests++;
-        if (Requests <= 0)
+        if (Requests == 0)
             notify();
     }
 }
