@@ -21,7 +21,7 @@ public class Semaphore {
             System.out.println(device.getName() + device.getType()+ " arrived");
         }
     }
-    public synchronized void end() {
+    public synchronized void V() {
         Requests++;
         if (Requests == 0)
             notify();
