@@ -2,7 +2,7 @@ package JavaSync;
 
 public class Device extends Thread {
     public static  Router CommonRouter;
-    public boolean State = false;
+    //public boolean State = false;
     private String Type;
     private int connect_port;
 
