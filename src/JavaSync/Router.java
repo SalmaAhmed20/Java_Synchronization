@@ -1,5 +1,8 @@
 package JavaSync;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 import static java.lang.Thread.sleep;
 
 public class Router {
@@ -28,6 +31,15 @@ public class Router {
                 dv.setConnect_port( i+1 );
                 System.out.println("Connection " + dv.getConnect_port() + ": (" + dv.getName()+
                                     ") ("+dv.getType() + ") Occupied");
+
+                try {
+                    FileWriter myWriter = new FileWriter("logged.txt");
+                    myWriter.write("Connection " + dv.getConnect_port() + ": (" + dv.getName()+
+                            ") ("+dv.getType() + ") Occupied");
+                    myWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 connectplaces[i] = true;
                 sleep(1000);
                 break;
