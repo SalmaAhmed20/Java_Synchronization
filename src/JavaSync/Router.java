@@ -1,5 +1,7 @@
 package JavaSync;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -31,21 +33,28 @@ public class Router {
                 dv.setConnect_port( i+1 );
                 System.out.println("Connection " + dv.getConnect_port() + ": (" + dv.getName()+
                                     ") ("+dv.getType() + ") Occupied");
-
-                try {
-                    FileWriter myWriter = new FileWriter("logged.txt");
-                    myWriter.write("Connection " + dv.getConnect_port() + ": (" + dv.getName()+
-                            ") ("+dv.getType() + ") Occupied");
-                    myWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
                 connectplaces[i] = true;
                 sleep(1000);
                 break;
             }
         }
         return dv.getConnect_port();
+    }
+    //simulate to doing something on the router
+    public String performsOnlineActivity () throws InterruptedException {
+        String activity = "Performs Online Activity";
+        sleep(2000);
+        return activity;
+
+    }
+    //to make all threads with same number of occupy
+    public synchronized String logOut(@NotNull Device dv) {
+
+        {
+            numOccupy--; //leave device the router
+            connectplaces[dv.getConnect_port()-1] = false; //free alloc
+        }
+        return "Log out";
     }
 
 
