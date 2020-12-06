@@ -1,5 +1,6 @@
 package JavaSync;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Network {
@@ -13,17 +14,20 @@ public class Network {
         System.out.println("What is number of devices Clients want to connect?");
         int nDev = input.nextInt();
 
-        Device [] devices = new  Device[nDev];
+        ArrayList <Device>devices = new  ArrayList<>(nDev);
 
         input=new Scanner(System.in); //to read input with new buffer
+        //add devices
         for (int j = 0; j < nDev; j++)
         {
             String NameType = input.nextLine();
-            devices[j] = new Device(NameType,SR);
+            devices.add(new Device(NameType,SR));
+
         }
-        for (int i = 0; i < nDev; i++) {
+        //start threads
+        for (int i = 0; i < devices.size(); i++) {
             Thread.sleep(1000);
-            devices[i].start();
+            devices.get(i).start();
         }
     }
 

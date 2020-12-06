@@ -4,10 +4,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Device extends Thread {
-    public static  Router CommonRouter;
-    private String Type;
-    private int connect_port;
+    public static  Router CommonRouter; //Shared Router between All devices
+    private String Type;    //type of device
+    private int connect_port;   //connected to which port
 
+    //constructor the name of device will be the name of our thread
     Device (String Str , Router SR)
     {
         super (Str.substring(0,Str.indexOf(" ")));
@@ -38,7 +39,9 @@ public class Device extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         try {
+            //send device to get port
             connect_port=CommonRouter.occupy(this);
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
