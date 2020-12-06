@@ -23,16 +23,21 @@ public class Router {
         connect = new Semaphore(num);
     }
     //occupy function that take device to Router and connect it if there is place in connect places array
-    //synchronized to be same value in all threads
+    //synchronized to be same value in all threads and no two devices connect together
     //InterruptedException because sleep , we use sleep here to give a time to do its activity
-    public synchronized int occupy(Device dv) throws InterruptedException {
+    public synchronized int occupy(Device dv) throws InterruptedException, IOException {
 
         for (int i = 0; i < nConnectplaces; i++) {
             if (!connectplaces[i]) {
                 numOccupy++;
                 dv.setConnect_port( i+1 );
-                System.out.println("Connection " + dv.getConnect_port() + ": (" + dv.getName()+
-                                    ") ("+dv.getType() + ") Occupied");
+                System.out.println("Connection " + dv.getConnect_port() + ": (" + dv.getName()+ ") ("+dv.getType() + ") Occupied");
+                /**************************************************************/
+                FileWriter Wr = new FileWriter("logged.txt",true);
+                Wr.write("Connection " + dv.getConnect_port() + ": (" + dv.getName()+
+                        ") ("+dv.getType() + ") Occupied");
+                Wr.close();
+                /**************************************************************/
                 connectplaces[i] = true;
                 sleep(1000);
                 break;
@@ -56,8 +61,4 @@ public class Router {
         }
         return "Log out";
     }
-
-
-
-
 }

@@ -1,8 +1,10 @@
 package JavaSync;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Device extends Thread {
     public static  Router CommonRouter;
-    //public boolean State = false;
     private String Type;
     private int connect_port;
 
@@ -13,7 +15,6 @@ public class Device extends Thread {
         CommonRouter = SR;
 
     }
-
 
     public void setType(String dtype) {
         Type=dtype;
@@ -31,6 +32,38 @@ public class Device extends Thread {
     }
     public void run()
     {
-
+        //To make connection and do activity you should first see if there any chance to connect to Router
+        try {
+            CommonRouter.connect.P(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            connect_port=CommonRouter.occupy(this);
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+        /***********Online Activity***************/
+        try {
+            String S ="Connection"+connect_port+": " +this.getType() + CommonRouter.performsOnlineActivity();
+            System.out.println(S);
+            FileWriter Wr = new FileWriter("logged.txt",true);
+            Wr.write(S);
+            Wr.close();
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+        /************Logout**************/
+        String S ="Connection"+connect_port+": " +this.getType() + CommonRouter.logOut(this);
+        System.out.println(S);
+        try {
+            FileWriter Wr = new FileWriter("logged.txt",true);
+            Wr.write(S);
+            Wr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /**********************/
+        CommonRouter.connect.V();
     }
 }
