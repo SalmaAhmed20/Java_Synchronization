@@ -45,7 +45,7 @@ public class Device extends Thread {
         }
         /***********Online Activity***************/
         try {
-            String S ="Connection"+connect_port+": " +this.getType() + CommonRouter.performsOnlineActivity();
+            String S ="Connection"+connect_port+": " +this.getName()+" "+ CommonRouter.performsOnlineActivity()+"\r\n";
             System.out.println(S);
             FileWriter Wr = new FileWriter("logged.txt",true);
             Wr.write(S);
@@ -54,7 +54,7 @@ public class Device extends Thread {
             e.printStackTrace();
         }
         /************Logout**************/
-        String S ="Connection"+connect_port+": " +this.getType() + CommonRouter.logOut(this);
+        String S ="Connection"+connect_port+": " +this.getName()+" "+ CommonRouter.logOut(this)+"\r\n";
         System.out.println(S);
         try {
             FileWriter Wr = new FileWriter("logged.txt",true);

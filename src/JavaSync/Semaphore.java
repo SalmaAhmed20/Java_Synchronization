@@ -16,7 +16,7 @@ public class Semaphore {
             try {
                 System.out.println(device.getName() +device.getType() + " arrived and waiting");
                 FileWriter Wr = new FileWriter("logged.txt",true);
-                Wr.write(device.getName() +device.getType() + " arrived and waiting");
+                Wr.write(device.getName() +" "+device.getType() + " arrived and waiting"+"\n");
                 Wr.close();
                 wait();
             } catch (InterruptedException | IOException e) {
@@ -24,15 +24,15 @@ public class Semaphore {
             }
         }
         else {
-            System.out.println(device.getName() + device.getType()+ " arrived");
+            System.out.println(device.getName() +" "+ device.getType()+ " arrived");
             FileWriter Wr = new FileWriter("logged.txt",true);
-            Wr.write(device.getName() +device.getType() + " arrived and waiting");
+            Wr.write(device.getName() +" "+device.getType() + " arrived " +"\n");
             Wr.close();
         }
     }
     public synchronized void V() {
         Requests++;
-        if (Requests == 0)
+        if (Requests <= 0)
             notify();
     }
 }

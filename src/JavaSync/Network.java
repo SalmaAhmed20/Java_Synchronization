@@ -23,7 +23,8 @@ public class Network {
         }
         for (int i = 0; i < nDev; i++) {
             Thread.sleep(1000);
-            devices[i].start();}
+            devices[i].start();
+        }
     }
 
 }

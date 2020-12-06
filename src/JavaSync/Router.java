@@ -35,7 +35,7 @@ public class Router {
                 /**************************************************************/
                 FileWriter Wr = new FileWriter("logged.txt",true);
                 Wr.write("Connection " + dv.getConnect_port() + ": (" + dv.getName()+
-                        ") ("+dv.getType() + ") Occupied");
+                        ") ("+dv.getType() + ") Occupied \n");
                 Wr.close();
                 /**************************************************************/
                 connectplaces[i] = true;
@@ -48,17 +48,15 @@ public class Router {
     //simulate to doing something on the router
     public String performsOnlineActivity () throws InterruptedException {
         String activity = "Performs Online Activity";
-        sleep(2000);
+        sleep(1000);
         return activity;
 
     }
     //to make all threads with same number of occupy
     public synchronized String logOut(@NotNull Device dv) {
 
-        {
             numOccupy--; //leave device the router
             connectplaces[dv.getConnect_port()-1] = false; //free alloc
-        }
         return "Log out";
     }
 }
