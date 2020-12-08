@@ -1,6 +1,5 @@
 package JavaSync;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -53,7 +52,7 @@ public class Router {
 
     }
     //to make all threads with same number of occupy
-    public synchronized String logOut(@NotNull Device dv) {
+    public synchronized String logOut(Device dv) {
 
             numOccupy--; //leave device the router
             connectplaces[dv.getConnect_port()-1] = false; //free alloc
